@@ -111,17 +111,125 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Bookstore
+# Target rules for targets named code
 
 # Build rule for target.
-Bookstore: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Bookstore
-.PHONY : Bookstore
+code: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 code
+.PHONY : code
 
 # fast build rule for target.
-Bookstore/fast:
-	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/build
-.PHONY : Bookstore/fast
+code/fast:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/build
+.PHONY : code/fast
+
+code/include/error.o: code/include/error.cpp.o
+
+.PHONY : code/include/error.o
+
+# target to build an object file
+code/include/error.cpp.o:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/error.cpp.o
+.PHONY : code/include/error.cpp.o
+
+code/include/error.i: code/include/error.cpp.i
+
+.PHONY : code/include/error.i
+
+# target to preprocess a source file
+code/include/error.cpp.i:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/error.cpp.i
+.PHONY : code/include/error.cpp.i
+
+code/include/error.s: code/include/error.cpp.s
+
+.PHONY : code/include/error.s
+
+# target to generate assembly for a file
+code/include/error.cpp.s:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/error.cpp.s
+.PHONY : code/include/error.cpp.s
+
+code/include/interpreter.o: code/include/interpreter.cpp.o
+
+.PHONY : code/include/interpreter.o
+
+# target to build an object file
+code/include/interpreter.cpp.o:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/interpreter.cpp.o
+.PHONY : code/include/interpreter.cpp.o
+
+code/include/interpreter.i: code/include/interpreter.cpp.i
+
+.PHONY : code/include/interpreter.i
+
+# target to preprocess a source file
+code/include/interpreter.cpp.i:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/interpreter.cpp.i
+.PHONY : code/include/interpreter.cpp.i
+
+code/include/interpreter.s: code/include/interpreter.cpp.s
+
+.PHONY : code/include/interpreter.s
+
+# target to generate assembly for a file
+code/include/interpreter.cpp.s:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/interpreter.cpp.s
+.PHONY : code/include/interpreter.cpp.s
+
+code/include/strlib.o: code/include/strlib.cpp.o
+
+.PHONY : code/include/strlib.o
+
+# target to build an object file
+code/include/strlib.cpp.o:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/strlib.cpp.o
+.PHONY : code/include/strlib.cpp.o
+
+code/include/strlib.i: code/include/strlib.cpp.i
+
+.PHONY : code/include/strlib.i
+
+# target to preprocess a source file
+code/include/strlib.cpp.i:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/strlib.cpp.i
+.PHONY : code/include/strlib.cpp.i
+
+code/include/strlib.s: code/include/strlib.cpp.s
+
+.PHONY : code/include/strlib.s
+
+# target to generate assembly for a file
+code/include/strlib.cpp.s:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/strlib.cpp.s
+.PHONY : code/include/strlib.cpp.s
+
+code/include/tokenScanner.o: code/include/tokenScanner.cpp.o
+
+.PHONY : code/include/tokenScanner.o
+
+# target to build an object file
+code/include/tokenScanner.cpp.o:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/tokenScanner.cpp.o
+.PHONY : code/include/tokenScanner.cpp.o
+
+code/include/tokenScanner.i: code/include/tokenScanner.cpp.i
+
+.PHONY : code/include/tokenScanner.i
+
+# target to preprocess a source file
+code/include/tokenScanner.cpp.i:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/tokenScanner.cpp.i
+.PHONY : code/include/tokenScanner.cpp.i
+
+code/include/tokenScanner.s: code/include/tokenScanner.cpp.s
+
+.PHONY : code/include/tokenScanner.s
+
+# target to generate assembly for a file
+code/include/tokenScanner.cpp.s:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/tokenScanner.cpp.s
+.PHONY : code/include/tokenScanner.cpp.s
 
 code/main.o: code/main.cpp.o
 
@@ -129,7 +237,7 @@ code/main.o: code/main.cpp.o
 
 # target to build an object file
 code/main.cpp.o:
-	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/code/main.cpp.o
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/main.cpp.o
 .PHONY : code/main.cpp.o
 
 code/main.i: code/main.cpp.i
@@ -138,7 +246,7 @@ code/main.i: code/main.cpp.i
 
 # target to preprocess a source file
 code/main.cpp.i:
-	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/code/main.cpp.i
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/main.cpp.i
 .PHONY : code/main.cpp.i
 
 code/main.s: code/main.cpp.s
@@ -147,7 +255,7 @@ code/main.s: code/main.cpp.s
 
 # target to generate assembly for a file
 code/main.cpp.s:
-	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/code/main.cpp.s
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/main.cpp.s
 .PHONY : code/main.cpp.s
 
 # Help Target
@@ -158,7 +266,19 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Bookstore"
+	@echo "... code"
+	@echo "... code/include/error.o"
+	@echo "... code/include/error.i"
+	@echo "... code/include/error.s"
+	@echo "... code/include/interpreter.o"
+	@echo "... code/include/interpreter.i"
+	@echo "... code/include/interpreter.s"
+	@echo "... code/include/strlib.o"
+	@echo "... code/include/strlib.i"
+	@echo "... code/include/strlib.s"
+	@echo "... code/include/tokenScanner.o"
+	@echo "... code/include/tokenScanner.i"
+	@echo "... code/include/tokenScanner.s"
 	@echo "... code/main.o"
 	@echo "... code/main.i"
 	@echo "... code/main.s"
