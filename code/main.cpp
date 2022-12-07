@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stack>
 #include "include/interpreter.h"
 #include "include/error.hpp"
 
