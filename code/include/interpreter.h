@@ -4,17 +4,23 @@
 #include "tokenScanner.hpp"
 #include "user.h"
 #include <stack>
+#include <vector>
+#include "writer.cpp"
 class Interpreter{
 public:
 	TokenScanner scanner;
 	std::stack<user>users;
+	std::vector<std::string>loggerUsers;
+	writer<book>book_manager;
+	writer<user>user_manager;
+	int priority=0;
 	void init();
 	void input(const std::string &s);
 	void run();
 
 private:
-	std::string az(const std::string &s);
-	char * ez(const char * &s);
+	std::string az(const std::string &s, const int n);
+	std::string ez(const std::string &s);
 };
 
 

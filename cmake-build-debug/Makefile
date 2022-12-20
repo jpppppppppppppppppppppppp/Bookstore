@@ -231,6 +231,33 @@ code/include/tokenScanner.cpp.s:
 	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/tokenScanner.cpp.s
 .PHONY : code/include/tokenScanner.cpp.s
 
+code/include/writer.o: code/include/writer.cpp.o
+
+.PHONY : code/include/writer.o
+
+# target to build an object file
+code/include/writer.cpp.o:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/writer.cpp.o
+.PHONY : code/include/writer.cpp.o
+
+code/include/writer.i: code/include/writer.cpp.i
+
+.PHONY : code/include/writer.i
+
+# target to preprocess a source file
+code/include/writer.cpp.i:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/writer.cpp.i
+.PHONY : code/include/writer.cpp.i
+
+code/include/writer.s: code/include/writer.cpp.s
+
+.PHONY : code/include/writer.s
+
+# target to generate assembly for a file
+code/include/writer.cpp.s:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/code/include/writer.cpp.s
+.PHONY : code/include/writer.cpp.s
+
 code/main.o: code/main.cpp.o
 
 .PHONY : code/main.o
@@ -279,6 +306,9 @@ help:
 	@echo "... code/include/tokenScanner.o"
 	@echo "... code/include/tokenScanner.i"
 	@echo "... code/include/tokenScanner.s"
+	@echo "... code/include/writer.o"
+	@echo "... code/include/writer.i"
+	@echo "... code/include/writer.s"
 	@echo "... code/main.o"
 	@echo "... code/main.i"
 	@echo "... code/main.s"

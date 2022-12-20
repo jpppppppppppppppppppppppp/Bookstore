@@ -9,4 +9,5 @@ add_executable(code
         code/include/interpreter.cpp
         code/include/error.cpp
         code/include/strlib.cpp
+        code/include/writer.cpp
         )
