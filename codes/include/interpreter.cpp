@@ -55,6 +55,17 @@ void Interpreter::run(){
 		user_manager.f(temp, s);
 		if(!s.empty()){
 			if(s.begin()->type < priority){
+				if(scanner.hasMoreTokens()){
+					UserPW = scanner.nextToken();
+					if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+					if(UserPW.length()>30)throw ErrorException("Invalid");
+					for(auto i:UserPW){
+						if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+					}
+					if(std::string(s.begin()->UserPW) != az(UserPW, 30)){
+						throw ErrorException("Invalid");
+					}
+				}
 				users.push(*(s.begin()));
 				priority = s.begin()->type;
 				loggerUsers.push_back(UserID);
