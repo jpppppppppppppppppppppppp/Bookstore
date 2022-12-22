@@ -313,6 +313,7 @@ void Interpreter::run(){
 			if(m[1] == 'n'){//name
 				if(nams_b)throw ErrorException("Invalid");
 				nams_b = true;
+				if(m.length()<=8)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<7;i++)check+=m[i];
 				if(check!="-name=\"")throw ErrorException("Invalid");
@@ -330,6 +331,7 @@ void Interpreter::run(){
 			else if(m[1] == 'k'){//keyword
 				if(keyword_b)throw ErrorException("Invalid");
 				keyword_b = true;
+				if(m.length()<=11)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<10;i++)check+=m[i];
 				if(check!="-keyword=\"")throw ErrorException("Invalid");
@@ -360,6 +362,7 @@ void Interpreter::run(){
 			else if(m[1] == 'a'){//author
 				if(author_b)throw ErrorException("Invalid");
 				author_b = true;
+				if(m.length()<=11)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<9;i++)check+=m[i];
 				if(check!="-author=\"")throw ErrorException("Invalid");
@@ -377,6 +380,7 @@ void Interpreter::run(){
 			else if(m[1] == 'I'){//ISBN
 				if(isbn_b)throw ErrorException("Invalid");
 				isbn_b = true;
+				if(m.length()<=6)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<6;i++)check+=m[i];
 				if(check!="-ISBN=")throw ErrorException("Invalid");
@@ -412,6 +416,7 @@ void Interpreter::run(){
 			else if(m[1] == 'p'){//price
 				if(price_b)throw ErrorException("invalid");
 				price_b = true;
+				if(m.length()<=7)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<7;i++)check+=m[i];
 				if(check!="-price=")throw ErrorException("Invalid");
