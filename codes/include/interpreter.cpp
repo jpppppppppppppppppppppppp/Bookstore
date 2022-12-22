@@ -158,6 +158,7 @@ void Interpreter::run(){
 			if(s.empty())throw ErrorException("Invalid");
 			else{
 				if(std::string((*s.begin()).UserPW) == az(CWD, 30)){
+					if(std::string(CWD)==std::string(WD))throw ErrorException("Invalid");
 					user_manager.d(temp);
 					strcpy(temp.UserPW, az(WD, 30).c_str());
 					strcpy(temp.UserName, s.begin()->UserName);
