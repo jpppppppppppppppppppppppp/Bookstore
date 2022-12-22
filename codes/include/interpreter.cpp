@@ -10,7 +10,7 @@ void Interpreter::init(){
 	scanner.ignoreWhitespace();
 	scanner.scanStrings();
 	std::string tt = "_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;";
-	for(int i=0 ;i<=31;i++){
+	for(int i=0;i<=31;i++){
 		tt += (char)i;
 	}
 	tt+=(char)127;
@@ -574,7 +574,7 @@ void Interpreter::run(){
 						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
-				if(pattern[1] == 'n'){
+				else if(pattern[1] == 'n'){
 					if(pattern.length() <= 8)throw ErrorException("Invalid");
 					std::string check;
 					for(int i=0;i<7;i++)check+=pattern[i];
@@ -588,7 +588,7 @@ void Interpreter::run(){
 						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
-				if(pattern[1] == 'a'){
+				else if(pattern[1] == 'a'){
 					if(pattern.length() <= 10)throw ErrorException("Invalid");
 					std::string check;
 					for(int i=0;i<9;i++)check+=pattern[i];
@@ -602,7 +602,7 @@ void Interpreter::run(){
 						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
-				if(pattern[1] == 'k'){
+				else if(pattern[1] == 'k'){
 					if(pattern.length() <= 11)throw ErrorException("Invalid");
 					std::string check;
 					for(int i=0;i<10;i++)check+=pattern[i];
@@ -615,7 +615,7 @@ void Interpreter::run(){
 					for(auto i:p){
 						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
-				}
+				}else throw ErrorException("Invalid");
 				std::fstream temp(book_manager.filename);
 				for(int i = 0; i < book_manager.num; i++){
 					writer<book>::block tt;
@@ -643,7 +643,7 @@ void Interpreter::run(){
 								}
 								else tttt+=cha;
 							}
-						}
+						}else throw ErrorException("Invalid");
 						if(flag){
 							std::cout << ez(std::string(tt.books[j].main_key)) << '\t'
 							          << ez(std::string(tt.books[j].Bookname)) << '\t'
