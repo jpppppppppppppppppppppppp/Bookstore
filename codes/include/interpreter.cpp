@@ -117,6 +117,9 @@ void Interpreter::run(){
 		for(auto i:UserPW){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
 		}
+		for(auto i:UserName){
+			if(i<=31 or i==127)throw ErrorException("Invalid");
+		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
 		std::set<user> s;
@@ -208,8 +211,9 @@ void Interpreter::run(){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
 		}
 		if(UserName.length()>30)throw ErrorException("Invalid");
-
-
+		for(auto i:UserName){
+			if(i<=31 or i==127)throw ErrorException("Invalid");
+		}
 		int pp = p[0] - '0';
 		if(pp != 1 and pp != 3 and pp != 7 and pp!= 0)throw ErrorException("Invalid");
 		if(pp >= priority)throw ErrorException("Invalid");
