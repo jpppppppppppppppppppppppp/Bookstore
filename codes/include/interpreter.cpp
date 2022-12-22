@@ -9,7 +9,7 @@
 void Interpreter::init(){
 	scanner.ignoreWhitespace();
 	scanner.scanStrings();
-	scanner.addWordCharacters("_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:");
+	scanner.addWordCharacters("_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;");
 	book_manager.setup("book");
 	user_manager.setup("user");
 	if(user_manager.num==0){
@@ -45,7 +45,10 @@ void Interpreter::run(){
 		std::string UserID, UserPW;
 		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
 		else throw ErrorException("Invalid");
-
+		if(UserID.length()>30)throw ErrorException("Invalid");
+		for(auto i:UserID){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
 		user temp {};
 		strcpy(temp.main_key, az(UserID, 30).c_str());
 		std::set<user> s;
@@ -60,6 +63,10 @@ void Interpreter::run(){
 				if(scanner.hasMoreTokens())UserPW = scanner.nextToken();
 				else throw ErrorException("Invalid");
 				if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+				if(UserPW.length()>30)throw ErrorException("Invalid");
+				for(auto i:UserPW){
+					if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+				}
 				if(std::string(s.begin()->UserPW) == az(UserPW, 30)){
 					users.push(*(s.begin()));
 					priority = s.begin()->type;
@@ -88,6 +95,15 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())UserName = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(UserID.length()>30)throw ErrorException("Invalid");
+		if(UserPW.length()>30)throw ErrorException("Invalid");
+		if(UserName.length()>30)throw ErrorException("Invalid");
+		for(auto i:UserID){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
+		for(auto i:UserPW){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
 		std::set<user> s;
@@ -107,8 +123,20 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())CWD = scanner.nextToken();
 		else throw ErrorException("Invalid");
+		if(UserID.length()>30)throw ErrorException("Invalid");
+		if(CWD.length()>30)throw ErrorException("Invalid");
+		for(auto i:UserID){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
+		for(auto i:CWD){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
 		if(scanner.hasMoreTokens()){
 			WD = scanner.nextToken();
+			if(WD.length()>30)throw ErrorException("Invalid");
+			for(auto i:WD){
+				if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			}
 			if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 			user temp;
 			strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -156,7 +184,17 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())UserName = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
-		if(scanner.getTokenType(p) != NUMBER)throw ErrorException("Invalid");
+		if(scanner.getTokenType(p) != NUMBER or p.length()!=1)throw ErrorException("Invalid");
+		if(UserID.length()>30)throw ErrorException("Invalid");
+		for(auto i:UserID){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
+		if(PW.length()>30)throw ErrorException("Invalid");
+		for(auto i:PW){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
+		if(UserName.length()>30)throw ErrorException("Invalid");
+
 		char pri[0];
 		strcpy(pri, p.c_str());
 		int pp = pri[0] - '0';
@@ -180,6 +218,10 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(UserID.length()>30)throw ErrorException("Invalid");
+		for(auto i:UserID){
+			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
 		std::set<user> s;
@@ -196,6 +238,7 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())isbn = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(isbn.length()>20)throw ErrorException("Invalid");
 		book b;
 		strcpy(b.main_key, az(isbn, 30).c_str());
 		std::set<book> s;
@@ -212,6 +255,7 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())quantity = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(isbn.length()>20)throw ErrorException("Invalid");
 		int q = 0;
 		for(auto i: quantity){
 			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
@@ -259,6 +303,10 @@ void Interpreter::run(){
 				for(int i = 7; i < m.length() - 1; i++){
 					name += m[i];
 				}
+				if(name.length()>60)throw ErrorException("Invalid");
+				for(auto i:name){
+					if(i=='\"')throw ErrorException("Invalid");
+				}
 				strcpy(users.top().select.Bookname, az(name, 60).c_str());
 			}
 			else if(m[1] == 'k'){//keyword
@@ -268,12 +316,17 @@ void Interpreter::run(){
 				for(int i = 10; i < m.length() - 1; i++){
 					keyword += m[i];
 				}
+				if(keyword.length()>60)throw ErrorException("Invalid");
+				for(auto i:keyword){
+					if(i=='\"')throw ErrorException("Invalid");
+				}
 				std::string tt = keyword+"|";
 				std::string temp;
 				std::vector<std::string>ttttt;
 				temp = "";
 				for(auto i:tt){
 					if(i=='|'){
+						if(temp.empty())throw ErrorException("Invalid");
 						if(std::find(ttttt.begin(), ttttt.end(),temp)!=ttttt.end())throw ErrorException("Invalid");
 						else ttttt.push_back(temp);
 						temp = "";
@@ -289,6 +342,10 @@ void Interpreter::run(){
 				for(int i = 9; i < m.length() - 1; i++){
 					author += m[i];
 				}
+				if(author.length()>60)throw ErrorException("Invalid");
+				for(auto i:author){
+					if(i=='\"')throw ErrorException("Invalid");
+				}
 				strcpy(users.top().select.Author, az(author, 60).c_str());
 			}
 			else if(m[1] == 'I'){//ISBN
@@ -298,6 +355,7 @@ void Interpreter::run(){
 				for(int i = 6; i < m.length(); i++){
 					isbn += m[i];
 				}
+				if(isbn.length()>20)throw ErrorException("Invalid");
 				if(std::string(users.top().select.main_key) == az(isbn, 30))throw ErrorException("Invalid");
 				book temp;
 				strcpy(temp.main_key,az(isbn,30).c_str());
@@ -329,6 +387,7 @@ void Interpreter::run(){
 				int n = 0;
 				bool flag = false;
 				for(int i = 7; i < m.length(); i++){
+					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
 					if(flag)n++;
 					if(m[i] == '.')flag = true;
 					if(m[i]>='0' and m[i]<='9')price = price * 10 + m[i] - '0';
@@ -372,7 +431,7 @@ void Interpreter::run(){
 			if(i >= '0' and i <= '9'){
 				t = t * 10 + i - '0';
 			}
-			if(i=='-') throw ErrorException("Invalid");
+			if((i<'0' or i>'9') and i!='.')throw ErrorException("Invalid");
 			if(i=='.')flag = true;
 		}
 		for(int i=0;i<dsa;i++)t/=10;
@@ -422,11 +481,16 @@ void Interpreter::run(){
 					for(int i = 6; i < pattern.length(); i++){
 						p += pattern[i];
 					}
+					if(p.length()>20)throw ErrorException("Invalid");
 				}
 				if(pattern[1] == 'n'){
 					if(pattern.length() <= 8)throw ErrorException("Invalid");
 					for(int i = 7; i < pattern.length() - 1; i++){
 						p += pattern[i];
+					}
+					if(p.length()>60)throw ErrorException("Invalid");
+					for(auto i:p){
+						if(i=='\"')throw ErrorException("Invalid");
 					}
 				}
 				if(pattern[1] == 'a'){
@@ -434,11 +498,19 @@ void Interpreter::run(){
 					for(int i = 9; i < pattern.length() - 1; i++){
 						p += pattern[i];
 					}
+					if(p.length()>60)throw ErrorException("Invalid");
+					for(auto i:p){
+						if(i=='\"')throw ErrorException("Invalid");
+					}
 				}
 				if(pattern[1] == 'k'){
 					if(pattern.length() <= 11)throw ErrorException("Invalid");
 					for(int i = 10; i < pattern.length() - 1; i++){
 						p += pattern[i];
+					}
+					if(p.length()>60)throw ErrorException("Invalid");
+					for(auto i:p){
+						if(i=='\"')throw ErrorException("Invalid");
 					}
 				}
 				std::fstream temp(book_manager.filename);
