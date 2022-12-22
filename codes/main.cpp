@@ -10,9 +10,9 @@ int main(){
 	while (true) {
 		try {
 			std::string input;
-			getline(std::cin, input);
 			if (std::cin.eof())
 				return 0;
+			getline(std::cin, input);
 			if (input.empty())
 				continue;
 			if (input == "exit")return 0;
