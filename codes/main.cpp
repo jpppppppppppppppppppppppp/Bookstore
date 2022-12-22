@@ -23,5 +23,4 @@ int main(){
 			std::cout << ex.getMessage() << std::endl;
 		}
 	}
-	return 0;
 }
