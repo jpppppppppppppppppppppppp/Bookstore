@@ -403,7 +403,10 @@ void Interpreter::run(){
 				for(int i = 7; i < m.length(); i++){
 					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
 					if(flag)n++;
-					if(m[i] == '.')flag = true;
+					if(m[i] == '.'){
+						if(flag)throw ErrorException("Invalid");
+						flag = true;
+					}
 					if(m[i]>='0' and m[i]<='9')price = price * 10 + m[i] - '0';
 				}
 				for(int i = 0; i < n; i++)price /= 10;
@@ -446,7 +449,10 @@ void Interpreter::run(){
 				t = t * 10 + i - '0';
 			}
 			if((i<'0' or i>'9') and i!='.')throw ErrorException("Invalid");
-			if(i=='.')flag = true;
+			if(i=='.'){
+				if(flag)throw ErrorException("Invalid");
+				flag = true;
+			}
 		}
 		for(int i=0;i<dsa;i++)t/=10;
 		users.top().select.quantity += q;
