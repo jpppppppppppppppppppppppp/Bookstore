@@ -261,6 +261,9 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
+		for(auto i:isbn){
+			if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+		}
 		book b;
 		strcpy(b.main_key, az(isbn, 30).c_str());
 		std::set<book> s;
@@ -278,6 +281,9 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
+		for(auto i:isbn){
+			if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+		}
 		if(quantity.length()>10)throw ErrorException("Invalid");
 		long long q = 0;
 		for(auto i: quantity){
@@ -398,6 +404,9 @@ void Interpreter::run(){
 					isbn += m[i];
 				}
 				if(isbn.length()>20)throw ErrorException("Invalid");
+				for(auto i:isbn){
+					if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+				}
 				if(std::string(users.top().select.main_key) == az(isbn, 30))throw ErrorException("Invalid");
 				book temp;
 				strcpy(temp.main_key,az(isbn,30).c_str());
