@@ -8,6 +8,7 @@
 #include <string>
 void Interpreter::init(){
 	scanner.ignoreWhitespace();
+	scanner.scanStrings();
 	std::string tt = "_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;";
 	for(int i=0 ;i<=31;i++){
 		tt += (char)i;
