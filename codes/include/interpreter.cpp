@@ -9,7 +9,12 @@
 void Interpreter::init(){
 	scanner.ignoreWhitespace();
 	scanner.scanStrings();
-	scanner.addWordCharacters("_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;");
+	std::string tt = "_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;";
+	for(int i=1;i<=31;i++){
+		tt += (char)i;
+	}
+	tt+=(char)127;
+	scanner.addWordCharacters(tt);
 	book_manager.setup("book");
 	user_manager.setup("user");
 	if(user_manager.num==0){
