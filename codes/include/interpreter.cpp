@@ -442,6 +442,7 @@ void Interpreter::run(){
 			}
 			else throw ErrorException("Invalid");
 		}
+		if(q==0)throw ErrorException("Invalid");
 		bool flag= false;
 		int dsa=0;
 		for(auto i: TotalCost){
@@ -456,6 +457,7 @@ void Interpreter::run(){
 			}
 		}
 		for(int i=0;i<dsa;i++)t/=10;
+		if(t==0)throw ErrorException("Invalid");
 		users.top().select.quantity += q;
 		book_manager.d(users.top().select);
 		book_manager.w(users.top().select);
