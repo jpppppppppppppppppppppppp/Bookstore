@@ -13,7 +13,7 @@ struct book{
 	char Author[61]{};
 	char Keyword[61]{};
 	double price=0;
-	int quantity=0;
+	long long quantity=0;
 	inline book & operator =(const book &B){
 		strcpy(this->main_key,B.main_key);
 		strcpy(this->Bookname,B.Bookname);

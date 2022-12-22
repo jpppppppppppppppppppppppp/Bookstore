@@ -11,8 +11,10 @@ int main(){
 		try {
 			std::string input;
 			getline(std::cin, input);
-			if (input.empty())
+			if (std::cin.eof())
 				return 0;
+			if (input.empty())
+				continue;
 			if (input == "exit")return 0;
 			if (input == "quit")return 0;
 			interpreter.input(input);
