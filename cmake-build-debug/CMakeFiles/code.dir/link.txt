@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/code.dir/code/main.cpp.o CMakeFiles/code.dir/code/include/tokenScanner.cpp.o CMakeFiles/code.dir/code/include/interpreter.cpp.o CMakeFiles/code.dir/code/include/error.cpp.o CMakeFiles/code.dir/code/include/strlib.cpp.o CMakeFiles/code.dir/code/include/writer.cpp.o  -o code 
