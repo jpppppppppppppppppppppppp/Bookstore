@@ -8,11 +8,13 @@
 #include "writer.cpp"
 class Interpreter{
 public:
+	~Interpreter();
 	TokenScanner scanner;
 	std::stack<user>users;
 	std::vector<std::string>loggerUsers;
 	writer<book>book_manager;
 	writer<user>user_manager;
+	std::vector<std::pair<double,double>>finance;
 	int priority=0;
 	void init();
 	void input(const std::string &s);

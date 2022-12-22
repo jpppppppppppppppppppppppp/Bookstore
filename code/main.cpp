@@ -12,7 +12,7 @@ int main(){
 			std::string input;
 			getline(std::cin, input);
 			if (input.empty())
-				continue;
+				return 0;
 			if (input == "exit")return 0;
 			if (input == "quit")return 0;
 			interpreter.input(input);

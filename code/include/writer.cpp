@@ -6,8 +6,8 @@
 #include <set>
 #include <cstring>
 #include <algorithm>
-#define max_size 300
-#define min_size 150
+#define max_s 300
+#define min_s 150
 template<class T>
 class writer{
 public:
@@ -20,9 +20,9 @@ public:
 
 	struct block {
 		int len = 0;
-		char begin[60];
-		char end[60];
-		T books[max_size];
+		char begin[31];
+		char end[31];
+		T books[max_s];
 	};
 
 	void setup(const std::string& fname){
@@ -79,7 +79,7 @@ public:
 			io.seekg(j * unit);
 			block body;
 			io.read(reinterpret_cast<char*>(&body), unit);
-			if(body.len < max_size){
+			if(body.len < max_s){
 				if(std::string (temp.main_key) <std::string (body.begin)){
 					strcpy(body.begin, temp.main_key);
 					for(int i = body.len; i > 0; i--){
@@ -131,20 +131,20 @@ public:
 					return;
 				}
 			}
-			if(body.len == max_size){
+			if(body.len == max_s){
 				if(std::string (temp.main_key) >std::string (body.end) and j + 1 != num)continue;
 				else{
 					num++;
 					block n;
-					strcpy(body.end, body.books[min_size - 1].main_key);
-					strcpy(n.begin, body.books[min_size].main_key);
-					strcpy(n.end, body.books[max_size - 1].main_key);
-					for(int i = 0; i < min_size; i++){
-						n.books[i] = body.books[min_size + i];
+					strcpy(body.end, body.books[min_s - 1].main_key);
+					strcpy(n.begin, body.books[min_s].main_key);
+					strcpy(n.end, body.books[max_s - 1].main_key);
+					for(int i = 0; i < min_s; i++){
+						n.books[i] = body.books[min_s + i];
 						T b {};
-						body.books[min_size + i] = b;
+						body.books[min_s + i] = b;
 					}
-					body.len = min_size, n.len = min_size;
+					body.len = min_s, n.len = min_s;
 					for(int t = num - 2; t >= j; t--){
 						io.seekg(t * unit);
 						block tt;
@@ -172,9 +172,9 @@ public:
 			block body;
 			io.seekg(j * unit);
 			io.read(reinterpret_cast<char*>(&body), unit);
-			if(temp.main_key < body.begin)return;
+			if(std::string(temp.main_key) < std::string (body.begin))return;
 			else if(std::string (temp.main_key) <=std::string (body.end)){
-				char pb[65], pe[65];
+				char pb[31], pe[31];
 				if(body.len > 1){
 					strcpy(pb, body.books[1].main_key);
 					strcpy(pe, body.books[body.len - 2].main_key);
