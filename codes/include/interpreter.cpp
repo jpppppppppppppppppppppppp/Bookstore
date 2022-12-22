@@ -58,6 +58,7 @@ void Interpreter::run(){
 				users.push(*(s.begin()));
 				priority = s.begin()->type;
 				loggerUsers.push_back(UserID);
+				users.top().IsSelect = false;
 			}
 			else{
 				if(scanner.hasMoreTokens())UserPW = scanner.nextToken();
@@ -71,6 +72,7 @@ void Interpreter::run(){
 					users.push(*(s.begin()));
 					priority = s.begin()->type;
 					loggerUsers.push_back(UserID);
+					users.top().IsSelect = false;
 				}
 				else throw ErrorException("Invalid");
 			}
@@ -256,7 +258,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
-		int q = 0;
+		long long q = 0;
 		for(auto i: quantity){
 			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
 			else throw ErrorException("Invalid");
@@ -299,6 +301,10 @@ void Interpreter::run(){
 			if(m[1] == 'n'){//name
 				if(nams_b)throw ErrorException("Invalid");
 				nams_b = true;
+				std::string check;
+				for(int i=0;i<7;i++)check+=m[i];
+				if(check!="-name=\"")throw ErrorException("Invalid");
+				if(m[m.length()-1]!='\"')throw ErrorException("Invalid");
 				std::string name;
 				for(int i = 7; i < m.length() - 1; i++){
 					name += m[i];
@@ -312,6 +318,10 @@ void Interpreter::run(){
 			else if(m[1] == 'k'){//keyword
 				if(keyword_b)throw ErrorException("Invalid");
 				keyword_b = true;
+				std::string check;
+				for(int i=0;i<10;i++)check+=m[i];
+				if(check!="-keyword=\"")throw ErrorException("Invalid");
+				if(m[m.length()-1]!='\"')throw ErrorException("Invalid");
 				std::string keyword;
 				for(int i = 10; i < m.length() - 1; i++){
 					keyword += m[i];
@@ -338,6 +348,10 @@ void Interpreter::run(){
 			else if(m[1] == 'a'){//author
 				if(author_b)throw ErrorException("Invalid");
 				author_b = true;
+				std::string check;
+				for(int i=0;i<9;i++)check+=m[i];
+				if(check!="-author=\"")throw ErrorException("Invalid");
+				if(m[m.length()-1]!='\"')throw ErrorException("Invalid");
 				std::string author;
 				for(int i = 9; i < m.length() - 1; i++){
 					author += m[i];
@@ -455,11 +469,13 @@ void Interpreter::run(){
 					if(scanner.hasMoreTokens()){
 						std::string count = scanner.nextToken();
 						if(scanner.hasMoreTokens())throw ErrorException("Invalid");
-						int c=0;
+						if(count.length()>10)throw ErrorException("Invalid");
+						long c=0;
 						for(auto i:count){
 							if(i>='0' and i<='9')c=c*10+i-'0';
 							else throw ErrorException("Invalid");
 						}
+						if(c>2147483647)throw ErrorException("Invalid");
 						if(c==0)std::cout << '\n';
 						else{
 							if(c>finance.size())throw ErrorException("Invalid");
@@ -468,7 +484,8 @@ void Interpreter::run(){
 							}
 						}
 					}else{
-						printf("+ %.2f - %.2f\n",finance[0].first,finance[0].second);
+						if(finance.empty())std::cout << "+ 0.00 - 0.00\n";
+						else printf("+ %.2f - %.2f\n",finance[0].first,finance[0].second);
 					}
 				}else throw ErrorException("Invalid");
 			}
