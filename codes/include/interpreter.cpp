@@ -297,12 +297,8 @@ void Interpreter::run(){
 			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		if(quantity.length()>10)throw ErrorException("Invalid");
-		long long q = 0;
-		for(auto i: quantity){
-			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
-			else throw ErrorException("Invalid");
-		}
-		if(q == 0)throw ErrorException("Invalid");
+		int q = std::stoi(quantity);
+		if(q <= 0)throw ErrorException("Invalid");
 		book b;
 		strcpy(b.main_key, az(isbn, 30).c_str());
 		std::set<book> s;
@@ -452,20 +448,12 @@ void Interpreter::run(){
 				for(int i=0;i<7;i++)check+=m[i];
 				if(check!="-price=")throw ErrorException("Invalid");
 				double price=0;
-				int n = 0;
-				bool flag = false;
+				std::string dsa;
 				for(int i = 7; i < m.length(); i++){
-					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
-					if(m[i]<=31 or m[i]==127)throw ErrorException("Invalid");
-					if(flag)n++;
-					if(m[i] == '.'){
-						if(flag)throw ErrorException("Invalid");
-						flag = true;
-					}
-					if(m[i]>='0' and m[i]<='9')price = price * 10 + m[i] - '0';
+					dsa += m[i];
 				}
-				if(n>2)throw ErrorException("Invalid");
-				for(int i = 0; i < n; i++)price /= 10;
+				price = std::stod(dsa);
+				if(price<=0)throw ErrorException("Invalid");
 				users.top().select.price = price;
 			}
 			else throw ErrorException("Invalid");
@@ -493,31 +481,10 @@ void Interpreter::run(){
 		}
 		int q = 0;
 		double t = 0;
-		for(auto i: Quantity){
-			if(i<=31 or i==127)throw ErrorException("Invalid");
-			if(i >= '0' and i <= '9'){
-				q = q * 10 + i - '0';
-			}
-			else throw ErrorException("Invalid");
-		}
-		if(q==0)throw ErrorException("Invalid");
-		bool flag= false;
-		int dsa=0;
-		for(auto i: TotalCost){
-			if(flag)dsa++;
-			if(i<=31 or i==127)throw ErrorException("Invalid");
-			if(i >= '0' and i <= '9'){
-				t = t * 10 + i - '0';
-			}
-			if((i<'0' or i>'9') and i!='.')throw ErrorException("Invalid");
-			if(i=='.'){
-				if(flag)throw ErrorException("Invalid");
-				flag = true;
-			}
-		}
-		if(dsa>2)throw ErrorException("Invalid");
-		for(int i=0;i<dsa;i++)t/=10;
-		if(t==0)throw ErrorException("Invalid");
+		q = std::stoi(Quantity);
+		t = std::stod(TotalCost);
+		if(q<=0)throw ErrorException("Invalid");
+		if(t<=0)throw ErrorException("Invalid");
 		users.top().select.quantity += q;
 		book_manager.d(users.top().select);
 		book_manager.w(users.top().select);
@@ -677,6 +644,10 @@ void Interpreter::run(){
 				}
 			}
 		}
+	}
+	else if(mode == "log"){
+		if(priority!=7)throw ErrorException("Invalid");
+		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 	}
 	else throw ErrorException("Invalid");
 }
