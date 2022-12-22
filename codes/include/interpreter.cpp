@@ -10,7 +10,7 @@ void Interpreter::init(){
 	scanner.ignoreWhitespace();
 	scanner.scanStrings();
 	std::string tt = "_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;";
-	for(int i=1 ;i<=31;i++){
+	for(int i=0 ;i<=31;i++){
 		tt += (char)i;
 	}
 	tt+=(char)127;
@@ -38,6 +38,7 @@ void Interpreter::init(){
 			finance.push_back(std::make_pair(n,m));
 		}
 	}
+	os.close();
 }
 
 void Interpreter::input(const std::string &s){
@@ -445,6 +446,7 @@ void Interpreter::run(){
 			else if(m[1] == 'p'){//price
 				if(price_b)throw ErrorException("invalid");
 				price_b = true;
+				if(m.length()>20)throw ErrorException("Invalid");
 				if(m.length()<=7)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<7;i++)check+=m[i];
@@ -480,6 +482,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(Quantity.length()>10)throw ErrorException("Invalid");
+		if(TotalCost.length()>13)throw ErrorException("Invalid");
 		if(!users.top().IsSelect)throw ErrorException("Invalid");
 		std::set<book>s;
 		book_manager.f(users.top().select,s);
