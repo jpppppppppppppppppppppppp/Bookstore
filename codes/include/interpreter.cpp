@@ -328,7 +328,7 @@ void Interpreter::run(){
 				}
 				if(name.length()>60)throw ErrorException("Invalid");
 				for(auto i:name){
-					if(i=='\"')throw ErrorException("Invalid");
+					if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 				}
 				strcpy(users.top().select.Bookname, az(name, 60).c_str());
 			}
@@ -346,7 +346,7 @@ void Interpreter::run(){
 				}
 				if(keyword.length()>60)throw ErrorException("Invalid");
 				for(auto i:keyword){
-					if(i=='\"')throw ErrorException("Invalid");
+					if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 				}
 				std::string tt = keyword+"|";
 				std::string temp;
@@ -377,7 +377,7 @@ void Interpreter::run(){
 				}
 				if(author.length()>60)throw ErrorException("Invalid");
 				for(auto i:author){
-					if(i=='\"')throw ErrorException("Invalid");
+					if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 				}
 				strcpy(users.top().select.Author, az(author, 60).c_str());
 			}
@@ -550,7 +550,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"')throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
 				if(pattern[1] == 'a'){
@@ -564,7 +564,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"')throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
 				if(pattern[1] == 'k'){
@@ -578,7 +578,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"')throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
 					}
 				}
 				std::fstream temp(book_manager.filename);
