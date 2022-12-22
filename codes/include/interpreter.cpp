@@ -362,7 +362,7 @@ void Interpreter::run(){
 			else if(m[1] == 'a'){//author
 				if(author_b)throw ErrorException("Invalid");
 				author_b = true;
-				if(m.length()<=11)throw ErrorException("Invalid");
+				if(m.length()<=10)throw ErrorException("Invalid");
 				std::string check;
 				for(int i=0;i<9;i++)check+=m[i];
 				if(check!="-author=\"")throw ErrorException("Invalid");
@@ -527,6 +527,9 @@ void Interpreter::run(){
 				std::string p;
 				if(pattern[1] == 'I'){
 					if(pattern.length() <= 6)throw ErrorException("Invalid");
+					std::string check;
+					for(int i=0;i<6;i++)check+=pattern[i];
+					if(check!="-ISBN=")throw ErrorException("Invalid");
 					for(int i = 6; i < pattern.length(); i++){
 						p += pattern[i];
 					}
@@ -534,6 +537,10 @@ void Interpreter::run(){
 				}
 				if(pattern[1] == 'n'){
 					if(pattern.length() <= 8)throw ErrorException("Invalid");
+					std::string check;
+					for(int i=0;i<7;i++)check+=pattern[i];
+					if(check!="-name=\"")throw ErrorException("Invalid");
+					if(pattern[pattern.length()-1]!='\"')throw ErrorException("Invalid");
 					for(int i = 7; i < pattern.length() - 1; i++){
 						p += pattern[i];
 					}
@@ -544,6 +551,10 @@ void Interpreter::run(){
 				}
 				if(pattern[1] == 'a'){
 					if(pattern.length() <= 10)throw ErrorException("Invalid");
+					std::string check;
+					for(int i=0;i<9;i++)check+=pattern[i];
+					if(check!="-author=\"")throw ErrorException("Invalid");
+					if(pattern[pattern.length()-1]!='\"')throw ErrorException("Invalid");
 					for(int i = 9; i < pattern.length() - 1; i++){
 						p += pattern[i];
 					}
@@ -554,6 +565,10 @@ void Interpreter::run(){
 				}
 				if(pattern[1] == 'k'){
 					if(pattern.length() <= 11)throw ErrorException("Invalid");
+					std::string check;
+					for(int i=0;i<10;i++)check+=pattern[i];
+					if(check!="-keyword=\"")throw ErrorException("Invalid");
+					if(pattern[pattern.length()-1]!='\"')throw ErrorException("Invalid");
 					for(int i = 10; i < pattern.length() - 1; i++){
 						p += pattern[i];
 					}
