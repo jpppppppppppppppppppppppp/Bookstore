@@ -197,9 +197,8 @@ void Interpreter::run(){
 		}
 		if(UserName.length()>30)throw ErrorException("Invalid");
 
-		char pri[0];
-		strcpy(pri, p.c_str());
-		int pp = pri[0] - '0';
+
+		int pp = p[0] - '0';
 		if(pp != 1 and pp != 3 and pp != 7)throw ErrorException("Invalid");
 		if(pp >= priority)throw ErrorException("Invalid");
 		user temp;
@@ -258,6 +257,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
+		if(isbn.length()>10)throw ErrorException("Invalid");
 		long long q = 0;
 		for(auto i: quantity){
 			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
@@ -425,6 +425,7 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())TotalCost = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(Quantity.length()>10)throw ErrorException("Invalid");
 		if(!users.top().IsSelect)throw ErrorException("Invalid");
 		std::set<book>s;
 		book_manager.f(users.top().select,s);
