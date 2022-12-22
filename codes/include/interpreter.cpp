@@ -91,7 +91,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 	}
 	else if(mode == "logout"){
-		if(priority != 0){
+		if(!users.empty()){
 			loggerUsers.pop_back();
 			users.pop();
 			if(!users.empty())priority = users.top().type;
@@ -198,7 +198,7 @@ void Interpreter::run(){
 		if(scanner.hasMoreTokens())UserName = scanner.nextToken();
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
-		if(scanner.getTokenType(p) != NUMBER or p.length()!=1)throw ErrorException("Invalid");
+		if(!(p[0]>='0' and p[0]<='9') or p.length()!=1)throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
@@ -211,7 +211,7 @@ void Interpreter::run(){
 
 
 		int pp = p[0] - '0';
-		if(pp != 1 and pp != 3 and pp != 7)throw ErrorException("Invalid");
+		if(pp != 1 and pp != 3 and pp != 7 and pp!= 0)throw ErrorException("Invalid");
 		if(pp >= priority)throw ErrorException("Invalid");
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
