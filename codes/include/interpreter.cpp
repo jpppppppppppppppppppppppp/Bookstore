@@ -53,6 +53,7 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		user temp {};
 		strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -66,6 +67,7 @@ void Interpreter::run(){
 					if(UserPW.length()>30)throw ErrorException("Invalid");
 					for(auto i:UserPW){
 						if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+						if(i<=31 or i==127)throw ErrorException("Invalid");
 					}
 					if(std::string(s.begin()->UserPW) != az(UserPW, 30)){
 						throw ErrorException("Invalid");
@@ -83,6 +85,7 @@ void Interpreter::run(){
 				if(UserPW.length()>30)throw ErrorException("Invalid");
 				for(auto i:UserPW){
 					if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+					if(i<=31 or i==127)throw ErrorException("Invalid");
 				}
 				if(std::string(s.begin()->UserPW) == az(UserPW, 30)){
 					users.push(*(s.begin()));
@@ -118,9 +121,11 @@ void Interpreter::run(){
 		if(UserName.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		for(auto i:UserPW){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		for(auto i:UserName){
 			if(i<=31 or i==127)throw ErrorException("Invalid");
@@ -148,15 +153,18 @@ void Interpreter::run(){
 		if(CWD.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		for(auto i:CWD){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		if(scanner.hasMoreTokens()){
 			WD = scanner.nextToken();
 			if(WD.length()>30)throw ErrorException("Invalid");
 			for(auto i:WD){
 				if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+				if(i<=31 or i==127)throw ErrorException("Invalid");
 			}
 			if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 			user temp;
@@ -210,10 +218,12 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		if(PW.length()>30)throw ErrorException("Invalid");
 		for(auto i:PW){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		if(UserName.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserName){
@@ -243,6 +253,7 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -443,6 +454,7 @@ void Interpreter::run(){
 				bool flag = false;
 				for(int i = 7; i < m.length(); i++){
 					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
+					if(m[i]<=31 or m[i]==127)throw ErrorException("Invalid");
 					if(flag)n++;
 					if(m[i] == '.'){
 						if(flag)throw ErrorException("Invalid");
@@ -478,6 +490,7 @@ void Interpreter::run(){
 		int q = 0;
 		double t = 0;
 		for(auto i: Quantity){
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 			if(i >= '0' and i <= '9'){
 				q = q * 10 + i - '0';
 			}
@@ -488,6 +501,7 @@ void Interpreter::run(){
 		int dsa=0;
 		for(auto i: TotalCost){
 			if(flag)dsa++;
+			if(i<=31 or i==127)throw ErrorException("Invalid");
 			if(i >= '0' and i <= '9'){
 				t = t * 10 + i - '0';
 			}
@@ -552,6 +566,9 @@ void Interpreter::run(){
 						p += pattern[i];
 					}
 					if(p.length()>20)throw ErrorException("Invalid");
+					for(auto i:p){
+						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+					}
 				}
 				if(pattern[1] == 'n'){
 					if(pattern.length() <= 8)throw ErrorException("Invalid");
