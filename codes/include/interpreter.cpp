@@ -92,7 +92,7 @@ void Interpreter::run(){
 	}
 	else if(mode == "logout"){
 		if(priority != 0){
-			loggerUsers.erase(std::find(loggerUsers.begin(), loggerUsers.end(), ez(std::string(users.top().main_key))));
+			loggerUsers.pop_back();
 			users.pop();
 			if(!users.empty())priority = users.top().type;
 			else priority = 0;
