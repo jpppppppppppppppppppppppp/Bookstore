@@ -4,10 +4,10 @@ project(code)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(code
-        code/main.cpp
-        code/include/tokenScanner.cpp
-        code/include/interpreter.cpp
-        code/include/error.cpp
-        code/include/strlib.cpp
-        code/include/writer.cpp
+        codes/main.cpp
+        codes/include/tokenScanner.cpp
+        codes/include/interpreter.cpp
+        codes/include/error.cpp
+        codes/include/strlib.cpp
+        codes/include/writer.cpp
         )
