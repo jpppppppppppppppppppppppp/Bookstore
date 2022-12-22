@@ -269,7 +269,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
-		if(isbn.length()>10)throw ErrorException("Invalid");
+		if(quantity.length()>10)throw ErrorException("Invalid");
 		long long q = 0;
 		for(auto i: quantity){
 			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
@@ -377,6 +377,9 @@ void Interpreter::run(){
 			else if(m[1] == 'I'){//ISBN
 				if(isbn_b)throw ErrorException("Invalid");
 				isbn_b = true;
+				std::string check;
+				for(int i=0;i<6;i++)check+=m[i];
+				if(check!="-ISBN=")throw ErrorException("Invalid");
 				std::string isbn;
 				for(int i = 6; i < m.length(); i++){
 					isbn += m[i];
@@ -409,6 +412,9 @@ void Interpreter::run(){
 			else if(m[1] == 'p'){//price
 				if(price_b)throw ErrorException("invalid");
 				price_b = true;
+				std::string check;
+				for(int i=0;i<7;i++)check+=m[i];
+				if(check!="-price=")throw ErrorException("Invalid");
 				double price=0;
 				int n = 0;
 				bool flag = false;
