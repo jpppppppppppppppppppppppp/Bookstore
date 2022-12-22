@@ -462,6 +462,7 @@ void Interpreter::run(){
 					}
 					if(m[i]>='0' and m[i]<='9')price = price * 10 + m[i] - '0';
 				}
+				if(n>2)throw ErrorException("Invalid");
 				for(int i = 0; i < n; i++)price /= 10;
 				users.top().select.price = price;
 			}
@@ -511,6 +512,7 @@ void Interpreter::run(){
 				flag = true;
 			}
 		}
+		if(dsa>2)throw ErrorException("Invalid");
 		for(int i=0;i<dsa;i++)t/=10;
 		if(t==0)throw ErrorException("Invalid");
 		users.top().select.quantity += q;
