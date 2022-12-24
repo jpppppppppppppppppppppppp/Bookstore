@@ -6,16 +6,6 @@
 #include <fstream>
 #include <string>
 void Interpreter::init(){
-	scanner.ignoreWhitespace();
-	scanner.scanStrings();
-	std::string tt;
-	for(int i=0;i<=31;i++){
-		tt += (char)i;
-	}
-	for(int i=33;i<=127;i++){
-		tt += (char)i;
-	}
-	scanner.addWordCharacters(tt);
 	book_manager.setup("book");
 	user_manager.setup("user");
 	if(user_manager.num==0){
@@ -44,14 +34,32 @@ void Interpreter::init(){
 }
 
 void Interpreter::input(const std::string &s){
-	scanner.setInput(s);
+	n=0;
+	ps.clear();
+	std::string input = s+" ";
+	std::string temp;
+	for(auto i:input){
+		if(i==' '){
+			if(!temp.empty()){
+				ps.push_back(temp);
+				n++;
+				temp = "";
+			}
+		}
+		else temp+=i;
+	}
+	if(n==0){
+		n++;
+		ps.push_back("");
+	}
 }
 
 void Interpreter::run(){
-	std::string mode = scanner.nextToken();
+	std::string mode = ps[0];
+	n--;
 	if(mode == "su"){
 		std::string UserID, UserPW;
-		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
+		if(n>1)UserID = ps[1];
 		else throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
@@ -64,9 +72,9 @@ void Interpreter::run(){
 		user_manager.f(temp, s);
 		if(!s.empty()){
 			if(s.begin()->type < priority){
-				if(scanner.hasMoreTokens()){
-					UserPW = scanner.nextToken();
-					if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+				if(n>2){
+					UserPW = ps[2];
+					if(n>3)throw ErrorException("Invalid");
 					if(UserPW.length()>30)throw ErrorException("Invalid");
 					for(auto i:UserPW){
 						if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
@@ -82,9 +90,9 @@ void Interpreter::run(){
 				users.top().IsSelect = false;
 			}
 			else{
-				if(scanner.hasMoreTokens())UserPW = scanner.nextToken();
+				if(n>2)UserPW = ps[2];
 				else throw ErrorException("Invalid");
-				if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+				if(n>3)throw ErrorException("Invalid");
 				if(UserPW.length()>30)throw ErrorException("Invalid");
 				for(auto i:UserPW){
 					if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
@@ -102,7 +110,7 @@ void Interpreter::run(){
 		else throw ErrorException("Invalid");
 	}
 	else if(mode == "logout"){
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>1)throw ErrorException("Invalid");
 		if(!users.empty()){
 			loggerUsers.pop_back();
 			users.pop();
@@ -113,13 +121,13 @@ void Interpreter::run(){
 	}
 	else if(mode == "register"){
 		std::string UserID, UserPW, UserName;
-		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
+		if(n>1)UserID = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())UserPW = scanner.nextToken();
+		if(n>2)UserPW = ps[2];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())UserName = scanner.nextToken();
+		if(n>3)UserName = ps[3];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>4)throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		if(UserPW.length()>30)throw ErrorException("Invalid");
 		if(UserName.length()>30)throw ErrorException("Invalid");
@@ -149,9 +157,9 @@ void Interpreter::run(){
 	else if(mode == "passwd"){
 		std::string UserID, CWD, WD;
 		if(priority == 0)throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
+		if(n>1)UserID = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())CWD = scanner.nextToken();
+		if(n>2)CWD = ps[2];
 		else throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		if(CWD.length()>30)throw ErrorException("Invalid");
@@ -163,14 +171,14 @@ void Interpreter::run(){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
 			if(i<=32 or i==127)throw ErrorException("Invalid");
 		}
-		if(scanner.hasMoreTokens()){
-			WD = scanner.nextToken();
+		if(n>3){
+			WD = ps[3];
 			if(WD.length()>30)throw ErrorException("Invalid");
 			for(auto i:WD){
 				if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
 				if(i<=32 or i==127)throw ErrorException("Invalid");
 			}
-			if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+			if(n>4)throw ErrorException("Invalid");
 			user temp;
 			strcpy(temp.main_key, az(UserID, 30).c_str());
 			std::set<user> s;
@@ -208,15 +216,15 @@ void Interpreter::run(){
 	else if(mode == "useradd"){
 		if(priority < 3)throw ErrorException("Invalid");
 		std::string UserID, PW, p, UserName;
-		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
+		if(n>1)UserID = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())PW = scanner.nextToken();
+		if(n>2)PW = ps[2];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())p = scanner.nextToken();
+		if(n>3)p = ps[3];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())UserName = scanner.nextToken();
+		if(n>4)UserName = ps[4];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>5)throw ErrorException("Invalid");
 		if(!(p[0]>='0' and p[0]<='9') or p.length()!=1)throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
@@ -250,9 +258,9 @@ void Interpreter::run(){
 	else if(mode == "delete"){
 		if(priority < 7)throw ErrorException("Invalid");
 		std::string UserID;
-		if(scanner.hasMoreTokens())UserID = scanner.nextToken();
+		if(n>1)UserID = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>2)throw ErrorException("Invalid");
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
@@ -271,9 +279,9 @@ void Interpreter::run(){
 	else if(mode == "select"){
 		if(priority<3)throw ErrorException("Invalid");
 		std::string isbn;
-		if(scanner.hasMoreTokens())isbn = scanner.nextToken();
+		if(n>1)isbn = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>2)throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
 		for(auto i:isbn){
 			if(i<=32 or i==127)throw ErrorException("Invalid");
@@ -289,11 +297,11 @@ void Interpreter::run(){
 	else if(mode == "buy"){
 		if(priority==0)throw ErrorException("Invalid");
 		std::string isbn, quantity;
-		if(scanner.hasMoreTokens())isbn = scanner.nextToken();
+		if(n>1)isbn = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())quantity = scanner.nextToken();
+		if(n>2)quantity = ps[2];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>3)throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
 		for(auto i:isbn){
 			if(i<=32 or i==127)throw ErrorException("Invalid");
@@ -330,9 +338,11 @@ void Interpreter::run(){
 		std::set<book>ss;
 		book_manager.f(users.top().select,ss);
 		if(!ss.empty())users.top().select = *(ss.begin());
-		if(!scanner.hasMoreTokens())throw ErrorException("Invalid");
-		while (scanner.hasMoreTokens()){
-			std::string m = scanner.nextToken();
+		if(n==1)throw ErrorException("Invalid");
+		int mei = 1;
+		while (mei<n){
+			std::string m = ps[mei];
+			mei++;
 			if(m[0] != '-'){
 				throw ErrorException("Invalid");
 			}
@@ -477,11 +487,11 @@ void Interpreter::run(){
 	else if(mode == "import"){
 		if(priority<3)throw ErrorException("Invalid");
 		std::string Quantity, TotalCost;
-		if(scanner.hasMoreTokens())Quantity = scanner.nextToken();
+		if(n>1)Quantity = ps[1];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())TotalCost = scanner.nextToken();
+		if(n>2)TotalCost = ps[2];
 		else throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>3)throw ErrorException("Invalid");
 		if(Quantity.length()>10)throw ErrorException("Invalid");
 		if(TotalCost.length()>13)throw ErrorException("Invalid");
 		if(!users.top().IsSelect)throw ErrorException("Invalid");
@@ -529,14 +539,14 @@ void Interpreter::run(){
 	}
 	else if(mode == "show"){
 		if(priority==0)throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens()){
-			std::string pattern = scanner.nextToken();
+		if(n>1){
+			std::string pattern = ps[1];
 			if(pattern[0] != '-'){
 				if(pattern == "finance"){
 					if(priority!=7)throw ErrorException("Invalid");
-					if(scanner.hasMoreTokens()){
-						std::string count = scanner.nextToken();
-						if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+					if(n>2){
+						std::string count = ps[2];
+						if(n>3)throw ErrorException("Invalid");
 						if(count.length()>10)throw ErrorException("Invalid");
 						long c=0;
 						for(auto i:count){
@@ -563,7 +573,7 @@ void Interpreter::run(){
 				}else throw ErrorException("Invalid");
 			}
 			else{
-				if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+				if(n>2)throw ErrorException("Invalid");
 				int ans = 0;
 				std::string p;
 				if(pattern[1] == 'I'){
@@ -684,7 +694,7 @@ void Interpreter::run(){
 	}
 	else if(mode == "log"){
 		if(priority!=7)throw ErrorException("Invalid");
-		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
+		if(n>1)throw ErrorException("Invalid");
 	}
 	else if(mode.empty()){
 		return;
@@ -714,10 +724,9 @@ Interpreter::~Interpreter(){
 }
 
 bool Interpreter::p(){
-	std::string p = scanner.nextToken();
+	std::string p = ps[0];
 	if(p=="quit" or p=="exit")return true;
 	else{
-		scanner.saveToken(p);
 		return false;
 	}
 }

@@ -9,7 +9,8 @@
 class Interpreter{
 public:
 	~Interpreter();
-	TokenScanner scanner;
+	int n=0;
+	std::vector<std::string>ps;
 	std::stack<user>users;
 	std::vector<std::string>loggerUsers;
 	writer<book>book_manager;
