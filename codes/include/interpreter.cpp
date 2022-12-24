@@ -56,7 +56,6 @@ void Interpreter::input(const std::string &s){
 
 void Interpreter::run(){
 	std::string mode = ps[0];
-	n--;
 	if(mode == "su"){
 		std::string UserID, UserPW;
 		if(n>1)UserID = ps[1];
