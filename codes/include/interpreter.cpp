@@ -686,6 +686,9 @@ void Interpreter::run(){
 		if(priority!=7)throw ErrorException("Invalid");
 		if(scanner.hasMoreTokens())throw ErrorException("Invalid");
 	}
+	else if(mode.empty()){
+		return;
+	}
 	else throw ErrorException("Invalid");
 }
 
