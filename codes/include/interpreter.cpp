@@ -454,6 +454,7 @@ void Interpreter::run(){
 				int n = 0;
 				bool flag = false;
 				if(m[m.length()-1]=='.')throw ErrorException("Invalid");
+				if(m[7]=='.')throw ErrorException("Invalid");
 				for(int i = 7; i < m.length(); i++){
 					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
 					if(m[i]<=31 or m[i]==127)throw ErrorException("Invalid");
@@ -500,6 +501,7 @@ void Interpreter::run(){
 		bool flag= false;
 		int dsa=0;
 		if(TotalCost[TotalCost.length()-1]=='.')throw ErrorException("Invalid");
+		if(TotalCost[0]=='.')throw ErrorException("Invalid");
 		for(auto i: TotalCost){
 			if(flag)dsa++;
 			if(i<=31 or i==127)throw ErrorException("Invalid");

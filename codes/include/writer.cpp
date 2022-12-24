@@ -235,7 +235,7 @@ public:
 			if(std::string(temp.main_key) <=std::string(body.end)){
 				long fin = std::lower_bound(body.books, body.books + body.len, temp) - body.books;
 				for(int i = fin; i < body.len; i++){
-					if(std::string (body.books[i].main_key) ==std::string (temp.main_key)){
+					if(std::string (body.books[i].main_key) == std::string (temp.main_key)){
 						set.insert(body.books[i]);
 					}
 					else break;
@@ -245,7 +245,6 @@ public:
 			else{
 				continue;
 			}
-
 		}
 	}
 };
