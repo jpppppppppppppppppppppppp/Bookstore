@@ -9,11 +9,13 @@
 void Interpreter::init(){
 	scanner.ignoreWhitespace();
 	scanner.scanStrings();
-	std::string tt = "_,-+/\\.?'\"[]{}|=!@#$%^&*()~`<>:;";
+	std::string tt;
 	for(int i=0;i<=31;i++){
 		tt += (char)i;
 	}
-	tt+=(char)127;
+	for(int i=33;i<=127;i++){
+		tt += (char)i;
+	}
 	scanner.addWordCharacters(tt);
 	book_manager.setup("book");
 	user_manager.setup("user");
@@ -39,6 +41,7 @@ void Interpreter::init(){
 		}
 	}
 	os.close();
+	loggerUsers.clear();
 }
 
 void Interpreter::input(const std::string &s){
