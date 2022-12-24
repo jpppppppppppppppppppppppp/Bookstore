@@ -680,6 +680,7 @@ void Interpreter::run(){
 					std::cout << '\t'  << tt.books[j].quantity << '\n';
 				}
 			}
+			if(book_manager.num==0)std::cout << '\n';
 		}
 	}
 	else if(mode == "log"){
