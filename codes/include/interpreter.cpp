@@ -548,10 +548,12 @@ void Interpreter::run(){
 						else{
 							if(c>finance.size())throw ErrorException("Invalid");
 							else if(c==finance.size()){
-								printf("+ %.2f - %.2f\n",finance[0].first,finance[0].second);
+								if(finance.empty())std::cout << "+ 0.00 - 0.00\n";
+								else printf("+ %.2f - %.2f\n",finance[0].first,finance[0].second);
 							}
 							else{
-								printf("+ %.2f - %.2f\n",finance[0].first-finance[c].first,finance[0].second-finance[c].second);
+								if(finance.empty())std::cout << "+ 0.00 - 0.00\n";
+								else printf("+ %.2f - %.2f\n",finance[0].first-finance[c].first,finance[0].second-finance[c].second);
 							}
 						}
 					}else{
