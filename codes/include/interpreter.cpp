@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <string>
 void Interpreter::init(){
+	scanner.ignoreWhitespace();
 	scanner.scanStrings();
 	std::string tt;
 	for(int i=0;i<=31;i++){
