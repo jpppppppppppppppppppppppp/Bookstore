@@ -300,12 +300,12 @@ void Interpreter::run(){
 			if(i<=31 or i==127)throw ErrorException("Invalid");
 		}
 		if(quantity.length()>10)throw ErrorException("Invalid");
-		long long q = 0;
+		int q = 0;
 		for(auto i: quantity){
 			if(i >= '0' and i <= '9')q = q * 10 + (i - '0');
 			else throw ErrorException("Invalid");
 		}
-		if(q == 0)throw ErrorException("Invalid");
+		if(q <= 0)throw ErrorException("Invalid");
 		book b;
 		strcpy(b.main_key, az(isbn, 30).c_str());
 		std::set<book> s;
@@ -547,6 +547,9 @@ void Interpreter::run(){
 						if(c==0)std::cout << '\n';
 						else{
 							if(c>finance.size())throw ErrorException("Invalid");
+							else if(c==finance.size()){
+								printf("+ %.2f - %.2f\n",finance[0].first,finance[0].second);
+							}
 							else{
 								printf("+ %.2f - %.2f\n",finance[0].first-finance[c].first,finance[0].second-finance[c].second);
 							}
