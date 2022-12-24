@@ -328,10 +328,6 @@ void Interpreter::run(){
 		std::set<book>ss;
 		book_manager.f(users.top().select,ss);
 		if(!ss.empty())users.top().select = *(ss.begin());
-		else{
-			users.top().IsSelect = false;
-			throw ErrorException("Invalid");
-		}
 		while (scanner.hasMoreTokens()){
 			std::string m = scanner.nextToken();
 			if(m[0] != '-'){
@@ -487,10 +483,6 @@ void Interpreter::run(){
 		std::set<book>s;
 		book_manager.f(users.top().select,s);
 		if(!s.empty())users.top().select = *(s.begin());
-		else{
-			users.top().IsSelect = false;
-			throw ErrorException("Invalid");
-		}
 		int q = 0;
 		double t = 0;
 		for(auto i: Quantity){
@@ -653,7 +645,7 @@ void Interpreter::run(){
 
 							printf("%.2f", tt.books[j].price);
 
-							std::cout << '\t' << std::setprecision(0) << tt.books[j].quantity << '\n';
+							std::cout << '\t' << tt.books[j].quantity << '\n';
 							ans++;
 						}
 					}
@@ -673,7 +665,7 @@ void Interpreter::run(){
 
 					printf("%.2f", tt.books[j].price);
 
-					std::cout << '\t' << std::setprecision(0) << tt.books[j].quantity << '\n';
+					std::cout << '\t'  << tt.books[j].quantity << '\n';
 				}
 			}
 		}
