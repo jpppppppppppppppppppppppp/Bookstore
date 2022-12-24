@@ -713,5 +713,8 @@ Interpreter::~Interpreter(){
 bool Interpreter::p(){
 	std::string p = scanner.nextToken();
 	if(p=="quit" or p=="exit")return true;
-	else return false;
+	else{
+		scanner.saveToken(p);
+		return false;
+	}
 }
