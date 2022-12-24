@@ -330,6 +330,7 @@ void Interpreter::run(){
 		std::set<book>ss;
 		book_manager.f(users.top().select,ss);
 		if(!ss.empty())users.top().select = *(ss.begin());
+		if(!scanner.hasMoreTokens())throw ErrorException("Invalid");
 		while (scanner.hasMoreTokens()){
 			std::string m = scanner.nextToken();
 			if(m[0] != '-'){
@@ -679,7 +680,6 @@ void Interpreter::run(){
 					std::cout << '\t'  << tt.books[j].quantity << '\n';
 				}
 			}
-
 		}
 	}
 	else if(mode == "log"){
