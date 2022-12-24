@@ -39,6 +39,7 @@ void Interpreter::input(const std::string &s){
 	std::string input = s+" ";
 	std::string temp;
 	for(auto i:input){
+		if(i<=31 or i>=127)throw ErrorException("Invalid");
 		if(i==' '){
 			if(!temp.empty()){
 				ps.push_back(temp);
@@ -63,7 +64,7 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		user temp {};
 		strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -77,7 +78,7 @@ void Interpreter::run(){
 					if(UserPW.length()>30)throw ErrorException("Invalid");
 					for(auto i:UserPW){
 						if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-						if(i<=32 or i==127)throw ErrorException("Invalid");
+						if(i<=32 or i>=127)throw ErrorException("Invalid");
 					}
 					if(std::string(s.begin()->UserPW) != az(UserPW, 30)){
 						throw ErrorException("Invalid");
@@ -95,7 +96,7 @@ void Interpreter::run(){
 				if(UserPW.length()>30)throw ErrorException("Invalid");
 				for(auto i:UserPW){
 					if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-					if(i<=32 or i==127)throw ErrorException("Invalid");
+					if(i<=32 or i>=127)throw ErrorException("Invalid");
 				}
 				if(std::string(s.begin()->UserPW) == az(UserPW, 30)){
 					users.push(*(s.begin()));
@@ -132,14 +133,14 @@ void Interpreter::run(){
 		if(UserName.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		for(auto i:UserPW){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		for(auto i:UserName){
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -164,18 +165,18 @@ void Interpreter::run(){
 		if(CWD.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		for(auto i:CWD){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		if(n>3){
 			WD = ps[3];
 			if(WD.length()>30)throw ErrorException("Invalid");
 			for(auto i:WD){
 				if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-				if(i<=32 or i==127)throw ErrorException("Invalid");
+				if(i<=32 or i>=127)throw ErrorException("Invalid");
 			}
 			if(n>4)throw ErrorException("Invalid");
 			user temp;
@@ -228,16 +229,16 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		if(PW.length()>30)throw ErrorException("Invalid");
 		for(auto i:PW){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		if(UserName.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserName){
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		int pp = p[0] - '0';
 		if(pp != 1 and pp != 3 and pp != 7)throw ErrorException("Invalid");
@@ -263,7 +264,7 @@ void Interpreter::run(){
 		if(UserID.length()>30)throw ErrorException("Invalid");
 		for(auto i:UserID){
 			if(!((i>='0' and i<='9')or(i>='a' and i<='z')or(i>='A' and i<='Z')or i=='_'))throw ErrorException("Invalid");
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		user temp;
 		strcpy(temp.main_key, az(UserID, 30).c_str());
@@ -283,7 +284,7 @@ void Interpreter::run(){
 		if(n>2)throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
 		for(auto i:isbn){
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		book b;
 		strcpy(b.main_key, az(isbn, 30).c_str());
@@ -303,7 +304,7 @@ void Interpreter::run(){
 		if(n>3)throw ErrorException("Invalid");
 		if(isbn.length()>20)throw ErrorException("Invalid");
 		for(auto i:isbn){
-			if(i<=32 or i==127)throw ErrorException("Invalid");
+			if(i<=32 or i>=127)throw ErrorException("Invalid");
 		}
 		if(quantity.length()>10)throw ErrorException("Invalid");
 		int q = 0;
@@ -359,7 +360,7 @@ void Interpreter::run(){
 				}
 				if(name.length()>60)throw ErrorException("Invalid");
 				for(auto i:name){
-					if(i=='\"' or i<=32 or i==127)throw ErrorException("Invalid");
+					if(i=='\"' or i<=32 or i>=127)throw ErrorException("Invalid");
 				}
 				strcpy(users.top().select.Bookname, az(name, 60).c_str());
 			}
@@ -377,7 +378,7 @@ void Interpreter::run(){
 				}
 				if(keyword.length()>60)throw ErrorException("Invalid");
 				for(auto i:keyword){
-					if(i=='\"' or i<=32 or i==127)throw ErrorException("Invalid");
+					if(i=='\"' or i<=32 or i>=127)throw ErrorException("Invalid");
 				}
 				std::string tt = keyword+"|";
 				std::string temp;
@@ -408,7 +409,7 @@ void Interpreter::run(){
 				}
 				if(author.length()>60)throw ErrorException("Invalid");
 				for(auto i:author){
-					if(i=='\"' or i<=32 or i==127)throw ErrorException("Invalid");
+					if(i=='\"' or i<=32 or i>=127)throw ErrorException("Invalid");
 				}
 				strcpy(users.top().select.Author, az(author, 60).c_str());
 			}
@@ -425,7 +426,7 @@ void Interpreter::run(){
 				}
 				if(isbn.length()>20)throw ErrorException("Invalid");
 				for(auto i:isbn){
-					if(i<=32 or i==127)throw ErrorException("Invalid");
+					if(i<=32 or i>=127)throw ErrorException("Invalid");
 				}
 				if(std::string(users.top().select.main_key) == az(isbn, 30))throw ErrorException("Invalid");
 				book temp;
@@ -466,7 +467,7 @@ void Interpreter::run(){
 				if(m[7]=='.')throw ErrorException("Invalid");
 				for(int i = 7; i < m.length(); i++){
 					if((m[i]<'0' or m[i]>'9') and m[i]!='.')throw ErrorException("Invalid");
-					if(m[i]<=31 or m[i]==127)throw ErrorException("Invalid");
+					if(m[i]<=31 or m[i]>=127)throw ErrorException("Invalid");
 					if(flag)n++;
 					if(m[i] == '.'){
 						if(flag)throw ErrorException("Invalid");
@@ -513,7 +514,7 @@ void Interpreter::run(){
 		if(TotalCost[0]=='.')throw ErrorException("Invalid");
 		for(auto i: TotalCost){
 			if(flag)dsa++;
-			if(i<=31 or i==127)throw ErrorException("Invalid");
+			if(i<=31 or i>=127)throw ErrorException("Invalid");
 			if(i >= '0' and i <= '9'){
 				t = t * 10 + i - '0';
 			}
@@ -585,7 +586,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>20)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i>=127)throw ErrorException("Invalid");
 					}
 				}
 				else if(pattern[1] == 'n'){
@@ -599,7 +600,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i>=127)throw ErrorException("Invalid");
 					}
 				}
 				else if(pattern[1] == 'a'){
@@ -613,7 +614,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i>=127)throw ErrorException("Invalid");
 					}
 				}
 				else if(pattern[1] == 'k'){
@@ -627,7 +628,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"' or i<=31 or i==127 or i=='|')throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i>=127 or i=='|')throw ErrorException("Invalid");
 					}
 				}else throw ErrorException("Invalid");
 				std::fstream temp(book_manager.filename);
