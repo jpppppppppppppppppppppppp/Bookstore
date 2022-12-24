@@ -613,7 +613,7 @@ void Interpreter::run(){
 					}
 					if(p.length()>60)throw ErrorException("Invalid");
 					for(auto i:p){
-						if(i=='\"' or i<=31 or i==127)throw ErrorException("Invalid");
+						if(i=='\"' or i<=31 or i==127 or i=='|')throw ErrorException("Invalid");
 					}
 				}else throw ErrorException("Invalid");
 				std::fstream temp(book_manager.filename);
