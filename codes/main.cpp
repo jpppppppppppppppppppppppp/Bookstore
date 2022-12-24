@@ -15,9 +15,8 @@ int main(){
 			getline(std::cin, input);
 			if (input.empty())
 				continue;
-			if (input == "exit")return 0;
-			if (input == "quit")return 0;
 			interpreter.input(input);
+			if(interpreter.p())return 0;
 			interpreter.run();
 		} catch (ErrorException &ex) {
 			std::cout << ex.getMessage() << std::endl;

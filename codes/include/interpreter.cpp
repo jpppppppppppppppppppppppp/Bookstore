@@ -709,3 +709,9 @@ Interpreter::~Interpreter(){
 	}
 	os.close();
 }
+
+bool Interpreter::p(){
+	std::string p = scanner.nextToken();
+	if(p=="quit" or p=="exit")return true;
+	return false;
+}

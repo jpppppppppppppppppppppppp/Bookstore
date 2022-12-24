@@ -19,7 +19,7 @@ public:
 	void init();
 	void input(const std::string &s);
 	void run();
-
+	bool p();
 private:
 	std::string az(const std::string &s, const int n);
 	std::string ez(const std::string &s);
