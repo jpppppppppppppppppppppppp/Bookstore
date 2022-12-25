@@ -1,6 +1,6 @@
 # Bookstore
 
-Authot : jy
+`Author` : `jy`
 
 ## 目的
 
