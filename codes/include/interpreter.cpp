@@ -845,7 +845,7 @@ void Interpreter::run(){
 		          << "============================================================= FINANCE =============================================================\n";
 		std::cout << ANSI_COLOR_GREEN << " + " << ANSI_COLOR_RED << finance[0].first << ANSI_COLOR_GREEN << " - "
 		          << ANSI_COLOR_BLUE << finance[0].second << '\n' << ANSI_COLOR_RESET;
-		if(ss.nextToken() == "jy"){
+		if(ss.hasMoreTokens() and ss.nextToken() == "jy"){
 			std::cout
 				<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@@@@@@@@@@@@@@@@000000@@000000@0000000000000000000000@@@0000000@00000000000000000000@@00@@@@@@@@@@@@\n";
 			std::cout
