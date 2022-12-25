@@ -16,6 +16,7 @@ public:
 	writer<book>book_manager;
 	writer<user>user_manager;
 	std::vector<std::pair<double,double>>finance;
+	std::vector<std::string>cmds;
 	int priority=0;
 	void init();
 	void input(const std::string &s);
