@@ -13,6 +13,7 @@
 #define ANSI_COLOR_MAGENTA "\x1b[95m"
 #define ANSI_COLOR_CYAN    "\x1b[96m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
+
 void Interpreter::init(){
 	book_manager.setup("book");
 	user_manager.setup("user");
@@ -843,8 +844,10 @@ void Interpreter::run(){
 		}
 		std::cout << ANSI_COLOR_OLD_YELLOW
 		          << "============================================================= FINANCE =============================================================\n";
-		std::cout << ANSI_COLOR_GREEN << " + " << ANSI_COLOR_RED << finance[0].first << ANSI_COLOR_GREEN << " - "
-		          << ANSI_COLOR_BLUE << finance[0].second << '\n' << ANSI_COLOR_RESET;
+		double nnn=0,mmm=0;
+		if(!finance.empty())nnn=finance[0].first,mmm=finance[0].second;
+		std::cout << ANSI_COLOR_GREEN << " + " << ANSI_COLOR_RED << nnn << ANSI_COLOR_GREEN << " - "
+		          << ANSI_COLOR_BLUE << mmm << '\n' << ANSI_COLOR_RESET;
 		if(ss.hasMoreTokens() and ss.nextToken() == "jy"){
 			std::cout
 				<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@@@@@@@@@@@@@@@@000000@@000000@0000000000000000000000@@@0000000@00000000000000000000@@00@@@@@@@@@@@@\n";
