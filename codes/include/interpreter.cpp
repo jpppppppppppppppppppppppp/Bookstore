@@ -807,7 +807,7 @@ void Interpreter::run(){
 				std::cout << "DeleteUser\t" << ANSI_COLOR_RED << "ID:  " << ANSI_COLOR_GREEN << UserID << '\n'
 				          << ANSI_COLOR_RESET;
 			}
-			else if(mode == "buy"){
+			else if(mode_ == "buy"){
 				std::cout << ANSI_COLOR_CYAN;
 				for(int j = 0; j <= nn; j++)std::cout << " | ";
 				std::string isbn = ss.nextToken();
@@ -816,7 +816,7 @@ void Interpreter::run(){
 				std::cout << "Bought\t" << ANSI_COLOR_RED << "ISBN:  " << ANSI_COLOR_GREEN << isbn << ANSI_COLOR_RED
 				          << "\tQuantity:  " << ANSI_COLOR_YELLOW << quantity << '\n' << ANSI_COLOR_RESET;
 			}
-			else if(mode == "modify"){
+			else if(mode_ == "modify"){
 				std::cout << ANSI_COLOR_CYAN;
 				for(int j = 0; j <= nn; j++)std::cout << " | ";
 				std::string isbn = ss.nextToken();
@@ -829,7 +829,7 @@ void Interpreter::run(){
 				}
 				std::cout << '\n' << ANSI_COLOR_RESET;
 			}
-			else if(mode == "import"){
+			else if(mode_ == "import"){
 				std::cout << ANSI_COLOR_CYAN;
 				for(int j = 0; j <= nn; j++)std::cout << " | ";
 				std::string isbn = ss.nextToken();
