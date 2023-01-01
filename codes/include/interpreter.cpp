@@ -869,7 +869,7 @@ void Interpreter::run(){
 		if(!finance.empty())nnn = finance[0].first, mmm = finance[0].second;
 		std::cout << ANSI_COLOR_GREEN << " + " << ANSI_COLOR_RED << nnn << ANSI_COLOR_GREEN << " - " << ANSI_COLOR_BLUE
 		          << mmm << '\n' << ANSI_COLOR_RESET;
-		if(ss.hasMoreTokens() and ss.nextToken() == "jy"){
+		if(n>1 and ps[1] == "jy"){
 			std::cout
 				<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@@@@@@@@@@@@@@@@000000@@000000@0000000000000000000000@@@0000000@00000000000000000000@@00@@@@@@@@@@@@\n";
 			std::cout
@@ -1009,6 +1009,7 @@ Interpreter::~Interpreter(){
 
 bool Interpreter::p(){
 	std::string p = ps[0];
+	if(n>1)return false;
 	if(p == "quit" or p == "exit")return true;
 	else{
 		return false;
